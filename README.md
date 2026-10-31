@@ -17,11 +17,14 @@ It will automatically add all the thermostats to your Home Assistant installatio
 ## Sensors
 Besides the thermostats, the integration creates per-room sensors (air temperature, humidity and floor temperature, grouped under the room's device) and an outdoor temperature sensor. All of them have `state_class: measurement`, so Home Assistant records long-term statistics.
 
+A `<Room> Dehumidification` binary sensor is created for rooms whose cloud data contains `dehumidifierState` (read-only; shows whether the Sentio system requests dehumidification). The raw value is available in its `dehumidifier_state` attribute and on the room's climate entity. The mapping of raw value to on/off is a placeholder until the real values are known (see `dehumidification_requested` in `binary_sensor.py`).
+
 ### Known limitations
 - The set of room sensors is decided when the integration is set up. If a sensor appears on the controller later, reload the integration.
 - The Wavin library reports 0 for missing values, so a room that reports exactly 0 (e.g. 0 % humidity or 0 °C floor temperature) at setup is treated as having no such sensor and no entity is created for it.
 
 ## Changelog
+- 2026-10-31 Added per-room Dehumidification binary sensor (dehumidifierState). The wavinsentio library is now vendored as sentio_api.py (no PyPI requirement) to expose this field
 - 2026-10-31 Fix vacation/standby switch needing two clicks: wait for the write to finish before refreshing state
 - 2026-10-31 Added state_class measurement to room and outdoor temperature sensors (enables long-term statistics)
 - 2025-11-25 Fix missing timezone in empty vacationModeUntil by bumping wavinsentio package to 0.5.5
