@@ -14,7 +14,15 @@ Afterwards you can go to the Integrations sections and click the add integration
 
 It will automatically add all the thermostats to your Home Assistant installation and show each one as thermostats in the standard lovelace thermostat UI.
 
+## Sensors
+Besides the thermostats, the integration creates per-room sensors (air temperature, humidity and floor temperature, grouped under the room's device) and an outdoor temperature sensor. All of them have `state_class: measurement`, so Home Assistant records long-term statistics.
+
+### Known limitations
+- The set of room sensors is decided when the integration is set up. If a sensor appears on the controller later, reload the integration.
+- The Wavin library reports 0 for missing values, so a room that reports exactly 0 (e.g. 0 % humidity or 0 °C floor temperature) at setup is treated as having no such sensor and no entity is created for it.
+
 ## Changelog
+- 2026-10-31 Added state_class measurement to room and outdoor temperature sensors (enables long-term statistics)
 - 2025-11-25 Fix missing timezone in empty vacationModeUntil by bumping wavinsentio package to 0.5.5
 - 2025-08-02 Fix startup problem due to empty vacationModeUntil when never used before
 - 2025-08-02 Fix preset, vacation mode, standby mode, cooling mode and outdoor temperature
