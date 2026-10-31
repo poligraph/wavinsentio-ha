@@ -22,6 +22,7 @@ Besides the thermostats, the integration creates per-room sensors (air temperatu
 - The Wavin library reports 0 for missing values, so a room that reports exactly 0 (e.g. 0 % humidity or 0 °C floor temperature) at setup is treated as having no such sensor and no entity is created for it.
 
 ## Changelog
+- 2026-10-31 Fix vacation/standby switch needing two clicks: wait for the write to finish before refreshing state
 - 2026-10-31 Added state_class measurement to room and outdoor temperature sensors (enables long-term statistics)
 - 2025-11-25 Fix missing timezone in empty vacationModeUntil by bumping wavinsentio package to 0.5.5
 - 2025-08-02 Fix startup problem due to empty vacationModeUntil when never used before
