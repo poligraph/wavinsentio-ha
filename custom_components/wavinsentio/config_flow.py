@@ -7,7 +7,7 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.const import CONF_EMAIL, CONF_PASSWORD
 import homeassistant.helpers.config_validation as cv
-from wavinsentio.wavinsentio import UnauthorizedException, WavinSentio
+from .sentio_api import UnauthorizedException, WavinSentio
 
 from .const import CONF_DEVICE_NAME, DOMAIN
 

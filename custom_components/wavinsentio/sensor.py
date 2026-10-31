@@ -8,7 +8,7 @@ from homeassistant.components.sensor import (
 from homeassistant.const import PERCENTAGE, UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from wavinsentio.wavinsentio import OutdoorTemperatureSensor, Room
+from .sentio_api import OutdoorTemperatureSensor, Room
 
 from . import WavinSentioDataCoordinator
 from .const import CONF_DEVICE_NAME, DOMAIN

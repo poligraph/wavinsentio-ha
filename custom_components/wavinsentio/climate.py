@@ -11,7 +11,7 @@ from homeassistant.components.climate import (
 from homeassistant.const import ATTR_TEMPERATURE, UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from wavinsentio.wavinsentio import HCMode, Room, StandbyMode, VacationMode
+from .sentio_api import HCMode, Room, StandbyMode, VacationMode
 
 from . import WavinSentioDataCoordinator
 from .const import CONF_DEVICE_NAME, DOMAIN

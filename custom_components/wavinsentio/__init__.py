@@ -8,7 +8,7 @@ from homeassistant.const import CONF_EMAIL, CONF_PASSWORD
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
-from wavinsentio.wavinsentio import (
+from .sentio_api import (
     Device,
     Room,
     StandbyMode,

@@ -4,7 +4,7 @@ from homeassistant.components.switch import SwitchDeviceClass, SwitchEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from wavinsentio.wavinsentio import StandbyMode, VacationMode
+from .sentio_api import StandbyMode, VacationMode
 
 from . import WavinSentioDataCoordinator
 from .const import CONF_DEVICE_NAME, DOMAIN
