@@ -1,5 +1,6 @@
 """Wavin Sentio integration for Home Assistant."""
 
+import asyncio
 from datetime import timedelta
 import logging
 
@@ -55,7 +56,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: config_entries.ConfigEn
         )
     )
     if unload_ok:
-        hass.data[DOMAIN].pop(entry.entry_id)
+        hass.data[DOMAIN].pop("coordinator" + entry.data[CONF_DEVICE_NAME], None)
     return unload_ok
 
 
