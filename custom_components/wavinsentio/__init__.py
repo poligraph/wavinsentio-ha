@@ -117,27 +117,27 @@ class WavinSentioDataCoordinator(DataUpdateCoordinator):
 
     def turn_on_standby(self):
         """Turn on standby mode for the device."""
-        self.hass.async_add_executor_job(self.api.set_standby_mode, self.device_name, StandbyMode.STANDBY_MODE_ON)
+        return self.hass.async_add_executor_job(self.api.set_standby_mode, self.device_name, StandbyMode.STANDBY_MODE_ON)
 
     def turn_off_standby(self):
         """Turn off standby mode for the device."""
-        self.hass.async_add_executor_job(self.api.set_standby_mode, self.device_name, StandbyMode.STANDBY_MODE_OFF)
+        return self.hass.async_add_executor_job(self.api.set_standby_mode, self.device_name, StandbyMode.STANDBY_MODE_OFF)
 
     def turn_on_vacation_mode_device(self):
         """Turn on vacation mode for the device."""
-        self.hass.async_add_executor_job(self.api.set_vacation_mode, self.device_name, VacationMode.VACATION_MODE_ON)
+        return self.hass.async_add_executor_job(self.api.set_vacation_mode, self.device_name, VacationMode.VACATION_MODE_ON)
 
     def turn_off_vacation_mode_device(self):
         """Turn off vaction mode for the device."""
-        self.hass.async_add_executor_job(self.api.set_vacation_mode, self.device_name, VacationMode.VACATION_MODE_OFF)
+        return self.hass.async_add_executor_job(self.api.set_vacation_mode, self.device_name, VacationMode.VACATION_MODE_OFF)
 
     def turn_on_vacation_mode_room(self, room_id: int):
         """Turn on vacation mode for the room."""
-        self.hass.async_add_executor_job(self.api.set_vacation_mode_room, self.device_name, room_id, VacationMode.VACATION_MODE_ON)
+        return self.hass.async_add_executor_job(self.api.set_vacation_mode_room, self.device_name, room_id, VacationMode.VACATION_MODE_ON)
 
     def turn_off_vacation_mode_room(self, room_id: int):
         """Turn off vacation mode for the room."""
-        self.hass.async_add_executor_job(self.api.set_vacation_mode_room, self.device_name, room_id, VacationMode.VACATION_MODE_OFF)
+        return self.hass.async_add_executor_job(self.api.set_vacation_mode_room, self.device_name, room_id, VacationMode.VACATION_MODE_OFF)
 
     def set_vacation_mode_until(self, value):
         """Set the vacation mode until value."""
