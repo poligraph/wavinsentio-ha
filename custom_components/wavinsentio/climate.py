@@ -141,12 +141,12 @@ class WavinSentioClimateEntity(CoordinatorEntity, ClimateEntity):
         if preset_mode == "Vacation" and self._dataservice.get_device().lastConfig.sentio.vacationSettings.vacationMode != VacationMode.VACATION_MODE_ON:
             raise ValueError("Device is not in vacation mode, cannot set preset.")
         if preset_mode == "Vacation":
-            self._dataservice.turn_on_vacation_mode_room(
+            await self._dataservice.turn_on_vacation_mode_room(
                 self._room_id
             )
         else:
             if self._dataservice.get_device().lastConfig.sentio.vacationSettings.vacationMode == VacationMode.VACATION_MODE_ON:
-                self._dataservice.turn_off_vacation_mode_room(
+                await self._dataservice.turn_off_vacation_mode_room(
                     self._room_id
                 )
             temp_room = self._dataservice.get_room(self._room_id)
@@ -154,7 +154,7 @@ class WavinSentioClimateEntity(CoordinatorEntity, ClimateEntity):
                 if mode == preset_mode:
                     for preset in temp_room.temperaturePresets:
                         if preset.type == details.get("type") and preset.hcMode == self._dataservice.get_device().lastConfig.sentio.hcMode.value:
-                            self._dataservice.set_new_temperature(
+                            await self._dataservice.set_new_temperature(
                                 self._room_id, preset.setpointTemperature
                             )
                             break
