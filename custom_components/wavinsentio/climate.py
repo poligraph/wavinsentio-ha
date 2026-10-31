@@ -242,4 +242,6 @@ class WavinSentioClimateEntity(CoordinatorEntity, ClimateEntity):
         if temp_room is not None:
             attrs["current_temperature_floor"] = temp_room.floorTemperature
             attrs["current_temperature_air"] = temp_room.airTemperature
+            if getattr(temp_room, "dehumidifierState", None) is not None:
+                attrs["dehumidifier_state"] = temp_room.dehumidifierState
         return attrs

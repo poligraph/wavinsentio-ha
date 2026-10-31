@@ -21,7 +21,7 @@ from .const import CONF_DEVICE_NAME, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORMS: list[str] = ["climate", "sensor", "switch","datetime"]
+PLATFORMS: list[str] = ["climate", "sensor", "switch","datetime","binary_sensor"]
 
 async def async_setup_entry(hass: core.HomeAssistant, entry: config_entries.ConfigEntry) -> bool:
     """Set up Wavin Sentio from a config entry."""
