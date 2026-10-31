@@ -1,6 +1,10 @@
 """Wavin Sentio sensor platform: room temperature/humidity/floor temperature and outdoor temperature."""
 
-from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+    SensorStateClass,
+)
 from homeassistant.const import PERCENTAGE, UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -59,6 +63,7 @@ class WavinSentioRoomSensor(CoordinatorEntity, SensorEntity):
         """Initialize the sensor."""
         super().__init__(dataservice)
         self._dataservice = dataservice
+        self._attr_state_class = SensorStateClass.MEASUREMENT
         self._room_id = room.id
         self._room_name = room.titlePersonalized
         self._measurement = measurement
@@ -108,6 +113,7 @@ class WavinSentioOutdoorTemperatureSensor(CoordinatorEntity, SensorEntity):
         """Initialize the sensor."""
         super().__init__(dataservice)
         self._state = None
+        self._attr_state_class = SensorStateClass.MEASUREMENT
         self._dataservice = dataservice
         self._outdoorTemperatureSensor = outdoorTemperatureSensor
 
