@@ -24,6 +24,7 @@ A `<Room> Dehumidification` binary sensor is created for rooms whose cloud data 
 - The Wavin library reports 0 for missing values, so a room that reports exactly 0 (e.g. 0 % humidity or 0 °C floor temperature) at setup is treated as having no such sensor and no entity is created for it.
 
 ## Changelog
+- 2026-10-31 Fix reloading/unloading the integration (async_unload_entry). Vacation and standby switches now show the written state until the cloud confirms it (up to 30 s) and poll immediately after a write. Climate entities no longer fail if a room disappears from the data, and the climate and switch platforms skip setup when the coordinator is missing
 - 2026-10-31 Added per-room Dehumidification binary sensor (dehumidifierState). The wavinsentio library is now vendored as sentio_api.py (no PyPI requirement) to expose this field
 - 2026-10-31 Fix vacation/standby switch needing two clicks: wait for the write to finish before refreshing state
 - 2026-10-31 Added state_class measurement to room and outdoor temperature sensors (enables long-term statistics)

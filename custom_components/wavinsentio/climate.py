@@ -32,6 +32,9 @@ async def async_setup_entry(hass: HomeAssistant, entry, async_add_entities):
     """Set up Wavin Sentio climate entities from a config entry."""
     dataservice = cast(WavinSentioDataCoordinator,hass.data[DOMAIN].get("coordinator" + entry.data[CONF_DEVICE_NAME]))
 
+    if not dataservice:
+        return
+
     rooms = dataservice.get_device().lastConfig.sentio.rooms
 
     entities = []
@@ -118,6 +121,8 @@ class WavinSentioClimateEntity(CoordinatorEntity, ClimateEntity):
     def preset_mode(self):
         """Return the current preset mode."""
         temp_room = self._dataservice.get_room(self._room_id)
+        if temp_room is None:
+            return None
         if temp_room.vacationMode == VacationMode.VACATION_MODE_ON:
             return "Vacation"
         for preset in temp_room.temperaturePresets :
@@ -159,7 +164,7 @@ class WavinSentioClimateEntity(CoordinatorEntity, ClimateEntity):
                             )
                             break
                     break
-        await self.coordinator.async_request_refresh()
+        await self.coordinator.async_refresh()
 
     @property
     def is_on(self):
@@ -181,12 +186,14 @@ class WavinSentioClimateEntity(CoordinatorEntity, ClimateEntity):
             await self._dataservice.set_new_temperature(
                 self._room_id, kwargs.get(ATTR_TEMPERATURE)
             )
-            await self.coordinator.async_request_refresh()
+            await self.coordinator.async_refresh()
 
     @property
     def hvac_action(self):
         """Return the current running hvac operation if supported."""
         temp_room = self._dataservice.get_room(self._room_id)
+        if temp_room is None:
+            return HVACAction.IDLE
         if temp_room.temperatureState == "TEMPERATURE_STATE_HEATING":
             return HVACAction.HEATING
         if temp_room.temperatureState == "TEMPERATURE_STATE_COOLING":
